@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.RectF;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -17,6 +18,9 @@ public class DrawView extends View
 {
     private final LinkedList<PointF> points;
     private final Paint              paint;
+    private float lastTouchX;
+    private float lastTouchY;
+    private final RectF dirtyRect = new RectF();
 
     public DrawView(Context context, AttributeSet attrs)
     {
@@ -26,6 +30,7 @@ public class DrawView extends View
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(10);
         paint.setColor(Color.BLACK);
+        paint.setStrokeJoin(Paint.Join.ROUND);
     }
 
     @Override
@@ -53,13 +58,36 @@ public class DrawView extends View
             return true;
         }
         if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            resetDirtyRect(event.getX(), event.getY());
             for (int i = event.getHistorySize() - 1; i >= 0; i--) {
+
                 points.add(new PointF(event.getHistoricalX(i), event.getHistoricalY(i)));
+                expandDirtyRect(event.getHistoricalX(i), event.getHistoricalY(i));
             }
             points.add(new PointF(event.getX(), event.getY()));
             invalidate();
             return true;
         }
         return false;
+    }
+    private void expandDirtyRect(float historicalX,float historicalY){
+        if(historicalX < dirtyRect.left) {
+            dirtyRect.left = historicalX;
+        }else if(historicalX > dirtyRect.right){
+            dirtyRect.right = historicalX;
+        }
+        if(historicalX < dirtyRect.top){
+            dirtyRect.top = historicalY;
+        } else if (historicalX > dirtyRect.right){
+            dirtyRect.bottom = historicalY;
+
+        }
+    }
+
+    private void resetDirtyRect(float eventX, float eventY){
+        dirtyRect.left = Math.min(lastTouchX, eventX);
+        dirtyRect.right = Math.max(lastTouchX,eventX);
+        dirtyRect.top = Math.min(lastTouchY,eventY);
+        dirtyRect.bottom = Math.max(lastTouchY, eventY);
     }
 }

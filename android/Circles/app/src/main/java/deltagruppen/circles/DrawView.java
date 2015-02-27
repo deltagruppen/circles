@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Path;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -18,6 +19,7 @@ public class DrawView extends View
 {
     private final LinkedList<PointF> points;
     private final Paint              paint;
+    private Path path;
     private float lastTouchX;
     private float lastTouchY;
     private final RectF dirtyRect = new RectF();
@@ -44,7 +46,26 @@ public class DrawView extends View
 
         while (iterator.hasNext()) {
             PointF next = iterator.next();
-            canvas.drawLine(point.x, point.y, next.x, next.y, paint);
+            //canvas.drawLine(point.x, point.y, next.x, next.y, paint);
+            Path path = new Path();
+            boolean first = true;
+            for(int i = 0; i < points.size(); i += 2){
+                 point = points.get(i);
+                if(first){
+                    first = false;
+                    path.moveTo(point.x, point.y);
+                }
+
+                else if(i < points.size() - 1){
+                    next = points.get(i + 1);
+                    path.quadTo(point.x, point.y, next.x, next.y);
+                }else if (points.size() == 0) {return;}
+                else{
+                    path.lineTo(point.x, point.y);
+                }
+            }
+
+            canvas.drawPath(path, paint);
             point = next;
         }
     }

@@ -18,27 +18,22 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:background="#ffbfd8dc"
+            android:background="#cfd8dc"
             android:weightSum="1">
 
-            <ImageView
-                android:layout_width="92dp"
+            <WebView
+                android:layout_width="112dp"
                 android:layout_height="104dp"
-                android:id="@+id/imageView"
-                android:background="@drawable/hand_arrow"
-                android:layout_marginStart="18dp"
-                android:layout_marginLeft="18dp"
-                android:layout_margin="18dp"
+                android:id="@+id/web_view_1"
                 android:layout_marginTop="18dp"
-                android:layout_marginRight="36dp"
-                android:layout_marginEnd="36dp"
-                android:contentDescription="@string/hand_arrow_description" />
+                android:layout_marginLeft="15dp"></WebView>
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:weightSum="1">
+                android:weightSum="1"
+                android:layout_marginLeft="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -73,8 +68,8 @@
     </LinearLayout>
 
     <deltagruppen.circles.DrawView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/linearLayout"
         android:layout_toEndOf="@+id/linearLayout"

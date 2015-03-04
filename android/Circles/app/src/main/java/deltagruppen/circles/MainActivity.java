@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.webkit.WebView;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private WebView wv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +20,10 @@ public class MainActivity extends ActionBarActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+        wv = (WebView) findViewById(R.id.web_view_1);
+        wv.loadUrl("file:///android_asset/hand_animation.gif");
+
     }
 
 

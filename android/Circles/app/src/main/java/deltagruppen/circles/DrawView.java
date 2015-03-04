@@ -60,9 +60,10 @@ public class DrawView extends RelativeLayout
             return true;
         }
         if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            for (int i = 0; i < event.getHistorySize(); i++) {
+            for (int i = 1; i < event.getHistorySize(); i++) {
                 points.add(new PointF(event.getHistoricalX(i), event.getHistoricalY(i)));
-                path.lineTo(event.getHistoricalX(i), event.getHistoricalY(i));
+                path.quadTo(event.getHistoricalX(i-1), event.getHistoricalY(i-1), (event.getHistoricalX(i) + event.getHistoricalX(i-1))/2, (event.getHistoricalY(i) + event.getHistoricalY(i-1))/2);
+                //path.lineTo(event.getHistoricalX(i), event.getHistoricalY(i));
             }
             points.add(new PointF(event.getX(), event.getY()));
             path.lineTo(event.getX(), event.getY());

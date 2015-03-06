@@ -1,8 +1,0 @@
-# Swap files
-*.swp
-
-# Mac clutter
-*.DS_Store
-
-# Windows clutter
-Thumbs.db

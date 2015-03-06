@@ -8,24 +8,30 @@ import java.util.List;
 
 public class ImperfectCircleTest extends TestCase {
 
+    /**
+     *
+     * @throws Exception
+     */
+
     public void testGetPerimeterLength() throws Exception {
 
-        List<PointF> points = new ArrayList<>();
+        List<PointF> ps = new ArrayList<>();
 
-        PointF p1,p2,p3,p4;
+        PointF p1,p2,p3,p4,p5;
 
         p1 = new PointF(0,0);
         p2 = new PointF(1,0);
         p3 = new PointF(1,1);
         p4 = new PointF(0,1);
+        p5 = new PointF(0,0);
 
-        points.add(p1);
-        points.add(p2);
-        points.add(p3);
-        points.add(p4);
-        points.add(p1);
+        ps.add(p1);
+        ps.add(p2);
+        ps.add(p3);
+        ps.add(p4);
+        ps.add(p5);
 
-        ImperfectCircle ic = new ImperfectCircle(points);
+        ImperfectCircle ic = new ImperfectCircle(ps);
 
         double pLength = 4;
 
@@ -40,22 +46,23 @@ public class ImperfectCircleTest extends TestCase {
 
     public void testGetArea() throws Exception {
 
-        List<PointF> points = new ArrayList<>();
+        List<PointF> ps = new ArrayList<>();
 
-        PointF p1,p2,p3,p4;
+        PointF p1,p2,p3,p4,p5;
 
         p1 = new PointF(0,0);
         p2 = new PointF(1,0);
         p3 = new PointF(1,1);
         p4 = new PointF(0,1);
+        p5 = new PointF(0,0);
 
-        points.add(p1);
-        points.add(p2);
-        points.add(p3);
-        points.add(p4);
-        points.add(p1);
+        ps.add(p1);
+        ps.add(p2);
+        ps.add(p3);
+        ps.add(p4);
+        ps.add(p5);
 
-        ImperfectCircle ic = new ImperfectCircle(points);
+        ImperfectCircle ic = new ImperfectCircle(ps);
 
         double area = 1;
 

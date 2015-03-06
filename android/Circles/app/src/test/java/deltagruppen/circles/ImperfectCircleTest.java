@@ -23,6 +23,7 @@ public class ImperfectCircleTest extends TestCase {
         points.add(p2);
         points.add(p3);
         points.add(p4);
+        points.add(p1);
 
         ImperfectCircle ic = new ImperfectCircle(points);
 
@@ -31,6 +32,11 @@ public class ImperfectCircleTest extends TestCase {
         assertEquals(pLength, ic.getPerimeterLength());
 
     }
+
+    /**
+     *
+     * @throws Exception
+     */
 
     public void testGetArea() throws Exception {
 
@@ -47,6 +53,7 @@ public class ImperfectCircleTest extends TestCase {
         points.add(p2);
         points.add(p3);
         points.add(p4);
+        points.add(p1);
 
         ImperfectCircle ic = new ImperfectCircle(points);
 

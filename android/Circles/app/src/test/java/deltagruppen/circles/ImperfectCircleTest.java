@@ -9,9 +9,11 @@ import static org.junit.Assert.assertEquals;
 
 public class ImperfectCircleTest{
 
+    private static double delta = 0.001;
+
     //Test if function getPerimeterLength works as expected
     @Test
-    public void testGetPerimeterLength() throws Exception {
+    public void testGetPerimeterLength(){
 
         List<PointF> ps = new ArrayList<>();
 
@@ -31,13 +33,13 @@ public class ImperfectCircleTest{
 
         double expectedPerimeterLength = 4;
 
-        assertEquals(expectedPerimeterLength, ic.getPerimeterLength(), 0.01);
+        assertEquals(expectedPerimeterLength, ic.getPerimeterLength(), delta);
 
     }
 
     //Test if function getArea works as expected
     @Test
-    public void testGetArea() throws Exception {
+    public void testGetArea(){
 
         List<PointF> ps = new ArrayList<>();
 
@@ -56,7 +58,7 @@ public class ImperfectCircleTest{
 
         double expectedArea = 1;
 
-        assertEquals(expectedArea, ic.getArea(), 0.01);
+        assertEquals(expectedArea, ic.getArea(), delta);
 
     }
 

@@ -17,25 +17,28 @@ public class ImperfectCircleTest extends TestCase {
 
         List<PointF> ps = new ArrayList<>();
 
-        PointF p1,p2,p3,p4,p5;
+        float f1,f2,f3,f4;
+        f1 = 0;
+        f2 = 1;
+        f3 = 2;
+        f4 = 3;
 
-        p1 = new PointF(0,0);
-        p2 = new PointF(1,0);
-        p3 = new PointF(1,1);
-        p4 = new PointF(0,1);
-        p5 = new PointF(0,0);
+        ps.add( new PointF(f1,f2));
+        ps.add( new PointF(f3,f2));     // Symmetry of points where + is an intersection:
+        ps.add( new PointF(f4,f2));     //   *
+        ps.add( new PointF(f4,f3));     // * + * *
+        ps.add( new PointF(f4,f4));     //   *   *
+        ps.add( new PointF(f3,f4));     //   * * *
+        ps.add( new PointF(f2,f4));
+        ps.add( new PointF(f2,f3));
+        ps.add( new PointF(f2,f1));
 
-        ps.add(p1);
-        ps.add(p2);
-        ps.add(p3);
-        ps.add(p4);
-        ps.add(p5);
-
+        //There is trouble creating an IC from the current data for unknown reasons.
         ImperfectCircle ic = new ImperfectCircle(ps);
 
-        double pLength = 4;
+        double expectedPerimeterLength = 8;
 
-        assertEquals(pLength, ic.getPerimeterLength());
+        assertEquals(expectedPerimeterLength, ic.getPerimeterLength());
 
     }
 
@@ -48,25 +51,27 @@ public class ImperfectCircleTest extends TestCase {
 
         List<PointF> ps = new ArrayList<>();
 
-        PointF p1,p2,p3,p4,p5;
+        float f1,f2,f3,f4;
+        f1 = 0;
+        f2 = 1;
+        f3 = 2;
+        f4 = 3;
 
-        p1 = new PointF(0,0);
-        p2 = new PointF(1,0);
-        p3 = new PointF(1,1);
-        p4 = new PointF(0,1);
-        p5 = new PointF(0,0);
-
-        ps.add(p1);
-        ps.add(p2);
-        ps.add(p3);
-        ps.add(p4);
-        ps.add(p5);
+        ps.add( new PointF(f1,f2));
+        ps.add( new PointF(f3,f2));
+        ps.add( new PointF(f4,f2));
+        ps.add( new PointF(f4,f3));
+        ps.add( new PointF(f4,f4));
+        ps.add( new PointF(f3,f4));
+        ps.add( new PointF(f2,f4));
+        ps.add( new PointF(f2,f3));
+        ps.add( new PointF(f2,f1));
 
         ImperfectCircle ic = new ImperfectCircle(ps);
 
-        double area = 1;
+        double expectedArea = 4;
 
-        assertEquals(area, ic.getArea());
+        assertEquals(expectedArea, ic.getArea());
 
     }
 

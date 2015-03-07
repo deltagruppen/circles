@@ -17,27 +17,23 @@ public class ImperfectCircleTest extends TestCase {
 
         List<PointF> ps = new ArrayList<>();
 
-        float f1,f2,f3,f4;
+        float f1,f2;
         f1 = 0;
         f2 = 1;
-        f3 = 2;
-        f4 = 3;
 
-        ps.add( new PointF(f1,f2));
-        ps.add( new PointF(f3,f2));     // Symmetry of points where + is an intersection:
-        ps.add( new PointF(f4,f2));     //   *
-        ps.add( new PointF(f4,f3));     // * + * *
-        ps.add( new PointF(f4,f4));     //   *   *
-        ps.add( new PointF(f3,f4));     //   * * *
-        ps.add( new PointF(f2,f4));
-        ps.add( new PointF(f2,f3));
+        ps.add( new PointF(f1,f1));
         ps.add( new PointF(f2,f1));
+        ps.add( new PointF(f2,f2));
+        ps.add( new PointF(f1,f2));
+        ps.add( new PointF(f1,f1));
 
         //There is trouble creating an IC from the current data for unknown reasons.
         ImperfectCircle ic = new ImperfectCircle(ps);
 
-        double expectedPerimeterLength = 8;
+        double expectedPerimeterLength = 4;
+        double actualPerimeterLength = 4;
 
+        //assertEquals(expectedPerimeterLength, actualPerimeterLength);
         assertEquals(expectedPerimeterLength, ic.getPerimeterLength());
 
     }
@@ -51,26 +47,22 @@ public class ImperfectCircleTest extends TestCase {
 
         List<PointF> ps = new ArrayList<>();
 
-        float f1,f2,f3,f4;
+        float f1,f2;
         f1 = 0;
         f2 = 1;
-        f3 = 2;
-        f4 = 3;
 
-        ps.add( new PointF(f1,f2));
-        ps.add( new PointF(f3,f2));
-        ps.add( new PointF(f4,f2));
-        ps.add( new PointF(f4,f3));
-        ps.add( new PointF(f4,f4));
-        ps.add( new PointF(f3,f4));
-        ps.add( new PointF(f2,f4));
-        ps.add( new PointF(f2,f3));
+        ps.add( new PointF(f1,f1));
         ps.add( new PointF(f2,f1));
+        ps.add( new PointF(f2,f2));
+        ps.add( new PointF(f1,f2));
+        ps.add( new PointF(f1,f1));
 
         ImperfectCircle ic = new ImperfectCircle(ps);
 
-        double expectedArea = 4;
+        double expectedArea = 1;
+        //double actualArea = 1;
 
+        //assertEquals(expectedArea, actualArea);
         assertEquals(expectedArea, ic.getArea());
 
     }

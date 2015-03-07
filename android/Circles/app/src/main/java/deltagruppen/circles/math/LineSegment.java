@@ -18,8 +18,6 @@ public class LineSegment {
      */
     public LineSegment(PointF p1, PointF p2)
     {
-        //this.p1 = new Vector2D(p1.x, p1.y);
-        //this.p2 = new Vector2D(p2.x, p2.y);
         this(new Vector2D(p1.x, p1.y), new Vector2D(p2.x, p2.y));
     }
 

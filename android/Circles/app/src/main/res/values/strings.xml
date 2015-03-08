@@ -130,7 +130,7 @@
     <string name="calc_pi">Beräkning av pi</string>
     <string name="pi_info_title">10 fakta om pi</string>
     <string name="pi_info_subtitle">Talet pi har en flera tusen år gammal historia. Här kommer ett urval roliga fakta som vi stött på medans vi utvecklat appen.</string>
-    <string name="pi_intro_calculation"> När användaren rör skärmen genereras ett antal pixlar och genom att ett medelvärde av dessa beräknas representeras de som en enda punkt x. Genom ett svep över skärmen med fingret rör denne en serie av intilliggande pixlar som då genererar en figur. \n
-        Denna figur anses vara en "cirkel" om det finns två punkter i figuren som delar samma koordinater. \n \n
-        För att kunna beräkna Pi görs följande: \n </string>
+    <string name="pi_intro_calculation"> När användaren rör skärmen genereras ett antal pixlar och genom att ett medelvärde av dessa beräknas representeras de som en enda punkt x. Genom ett svep över skärmen med fingret rör denne en serie av intilliggande pixlar som då genererar en figur.
+        Denna figur anses vara en "cirkel" om det finns två punkter i figuren som delar samma koordinater.
+        För att kunna beräkna Pi görs följande: </string>
 </resources>

@@ -79,13 +79,13 @@
     <string name="title_activity_about_calculating_pi">AboutCalculatingPi</string>
 
             <string name="pi_calcultacion_step1_part1">
-         För varje par närliggande punkter p1 och p2 med koordinaterna (x1,y1) respektive (x2,y2) görs följande: \n
+         För varje par närliggande punkter p1 och p2 med koordinaterna (x1,y1) respektive (x2,y2) görs följande:
                 </string>
      <string name="pi_calcultacion_formula_1">
           &#8730;(&#916;x^2 + &#916;y^2)
          </string>
      <string name="pi_calcultacion_step1_part2">
-        Man beräknar skillnaden för dessa par koordinater i både x-led och i y-led. Dessa skillnader kvadreras, därefter summeras de och man tar kvadratroten ur resultatet. \n
+        Man beräknar skillnaden för dessa par koordinater i både x-led och i y-led. Dessa skillnader kvadreras, därefter summeras de och man tar kvadratroten ur resultatet.
         Detta görs för alla punkters koordinater i figuren, och sedan summeras alla dessa resultat, således får man omkretsen för cirkeln.
     </string>
     <string name="pi_calcultacion_step2_part1">
@@ -99,14 +99,14 @@
         Detta görs för alla punkters koordinater i figuren, och sedan summeras alla dessa resultat, således får man arean för cirkeln.
    </string>
         <string name="pi_calcultacion_step3_part1">
-         Approximationen av Pi beräknas då genom att vi vänder på den så kallade isoperimetriska olikheten som säger att:\n
+         Approximationen av Pi beräknas då genom att vi vänder på den så kallade isoperimetriska olikheten som säger att:
             </string>
         <string name="pi_calcultacion_step3_formula1">
-          Pi * A * 4 &#8804; med  L^2  \n
+          Pi * A * 4 &#8804; med  L^2
             </string>
     <string name="pi_calcultacion_step3_part2">
         Där A är arean och L  är omkretsen av den ritade figuren som tagits fram i 1) och 2).
-        Genom att lösa ut Pi ur denna olikhet kan vi nu beräkna approximationen som då ges av:\n
+        Genom att lösa ut Pi ur denna olikhet kan vi nu beräkna approximationen som då ges av:
     </string>
         <string name="pi_calcultacion_step3_formula2">
         Pi = L^2 / 4 * A

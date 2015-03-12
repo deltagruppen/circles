@@ -22,6 +22,7 @@ public class ImperfectCircle
      * of points can't be used.
      * @param input A list of points.
      */
+
     public ImperfectCircle(List<PointF> input)
     {
         // Clean the input (fixes issue #19)
@@ -29,10 +30,10 @@ public class ImperfectCircle
 
         // Generate a list of line segments from the input
         List<LineSegment> segments = new ArrayList<>();
+
         for (int i = 1; i < input.size(); i++) {
             segments.add(new LineSegment(input.get(i-1), input.get(i)));
         }
-
         // Find the first place two line segments intersect, and only
         // use the points that are on that closed curve.
         for (int i = 0; i < segments.size(); i++) {
@@ -41,7 +42,10 @@ public class ImperfectCircle
                 LineSegment s2 = segments.get(j);
 
                 PointF intersection = s1.getIntersection(s2);
+
+                //This if-statement is the location of the problem
                 if (intersection != null) {
+
                     points = new ArrayList<>(input.subList(i, j + 1));
 
                     // The intersection should be in the list of points
@@ -49,6 +53,7 @@ public class ImperfectCircle
 
                     // Add the first point to the end of the list
                     points.add(new PointF((float) s1.p1.getX(), (float) s1.p1.getY()));
+
                     return;
                 }
             }

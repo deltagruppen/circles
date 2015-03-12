@@ -83,7 +83,7 @@ public class LineSegmentPair {
      * endpoints of v1 and v2.
      * @param v1 A vector
      * @param v2 A vector
-     * @return The (posssibly negative) area v1 and v2 generate.
+     * @return The (possibly negative) area v1 and v2 generate.
      */
     private double cross(Vector2D v1, Vector2D v2) {
         return v1.getX() * v2.getY() - v2.getX() * v1.getY();

@@ -74,4 +74,10 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    public void showHighScore(View view) {
+        Intent intent = new Intent(this, HighScore.class);
+        startActivity(intent);
+    }
+
+
 }

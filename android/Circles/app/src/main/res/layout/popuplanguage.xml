@@ -27,7 +27,7 @@
             <Button
                 android:id="@+id/eng"
                 android:text="@string/eng"
-                android:layout_width="wrapo_content"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.06" />
             <Button

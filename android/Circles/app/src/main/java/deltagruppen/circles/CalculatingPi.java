@@ -56,4 +56,8 @@ public class CalculatingPi extends ActionBarActivity {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
     }
+    public void showPopup(MenuItem item) {
+        Intent intent = new Intent(this, popuplang.class);
+        startActivity(intent);
+    }
 }

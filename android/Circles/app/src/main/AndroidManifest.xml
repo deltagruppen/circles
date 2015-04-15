@@ -51,6 +51,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="deltagruppen.circles.MainActivity" />
         </activity>
+        <activity
+            android:name=".popuplang"
+            android:label="@string/title_activity_setting"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="deltagruppen.circles.MainActivity" />
+        </activity>
 
     </application>
 

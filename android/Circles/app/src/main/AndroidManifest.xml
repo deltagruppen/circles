@@ -44,6 +44,15 @@
                 android:value="deltagruppen.circles.MainActivity" />
         </activity>
 
+        <activity
+            android:name=".HighScore"
+            android:label="@string/highscore"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="deltagruppen.circles.MainActivity" />
+        </activity>
+
     </application>
 
 </manifest>

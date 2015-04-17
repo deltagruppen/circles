@@ -12,6 +12,7 @@ import android.view.WindowManager;
 
 public class MainActivity extends ActionBarActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,5 +74,11 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent(this, CalculatingPi.class);
         startActivity(intent);
     }
+
+    public void showHighScore(View view) {
+        Intent intent = new Intent(this, HighScore.class);
+        startActivity(intent);
+    }
+
 
 }

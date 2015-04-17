@@ -77,5 +77,8 @@
     <string name="title_activity_calculating_pi">CalculatingPi</string>
     <string name="title_activity_pi_info">Pi Info</string>
     <string name="your_pi">Ditt pi</string>
+    <string name="name">Namn</string>
+    <string name="correct_decimals">Korrekta decimaler</string>
+    <string name="value_of_pi">Värde på pi</string>
 
 </resources>

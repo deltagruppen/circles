@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/langPopup"
+        android:background="#ffffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/lang_popup_title"
+            android:id="@+id/textView4"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="center" />
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lang_popup_swe"
+                android:id="@+id/button_swe"
+                android:layout_row="0"
+                android:layout_column="0" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lang_popup_eng"
+                android:id="@+id/button_eng"
+                android:layout_row="0"
+                android:layout_column="2" />
+        </GridLayout>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lang_popup_keep"
+            android:id="@+id/button_cancel"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_gravity="center" />
+
+    </GridLayout>
+
+</LinearLayout>

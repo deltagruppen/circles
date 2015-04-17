@@ -2,7 +2,7 @@ package deltagruppen.circles;
 
 import android.content.SharedPreferences;
 import android.widget.TextView;
-
+import android.content.Context;
 import java.math.*;
 
 /**
@@ -10,10 +10,17 @@ import java.math.*;
  */
 public class HighScoreCalculator {
 
+    public static final String HIGH_SCORE = "HighScoreFile";
+
     boolean isHighScore = false;
+
+    public void startComparing (float pi){
+
+    }
 
     public void compareWithCurrent(float pi) {
         int i = 0;
+        SharedPreferences highscore = getSharedPreferences(HIGH_SCORE, Context.MODE_PRIVATE);
         isHighScore = false;
         while (i < 10) {
 

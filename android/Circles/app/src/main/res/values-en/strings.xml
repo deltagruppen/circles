@@ -3,7 +3,7 @@
     <string name="app_name">Perfect Pi</string>
     <string name="about_app_name">About Perfect Pi</string>
     <string name="about_calculating_pi_header">Calculation of pi</string>
-    <string name="about_perfect_pi_description">Perfect Pi is a collaboration between Stockholm Mathematics Centre(SMC) and students from the computer science faculty at KTH in order to arise interest for mathematics in general and pi especially. The project is an Open source project licensed under Apache License Version 2.0 (http://www.apache.org/license). The source code is available on https://github.com/deltagruppen/circles/.</string>
+    <string name="about_perfect_pi_description">Perfect Pi is a collaboration between Stockholm Mathematics Centre (SMC) and students from the computer science faculty at KTH in order to arise interest for mathematics in general and pi especially. The project is an Open source project licensed under Apache License Version 2.0 (http://www.apache.org/license). The source code is available on https://github.com/deltagruppen/circles/.</string>
     <string name="about_perfect_pi_header">About Perfect Pi</string>
     <string name="about_pi_header">Facts about pi</string>
     <string name="about_pi_title">Facts about pi</string>
@@ -18,7 +18,7 @@
     <string name="about_app_head_guiux">GUI/UX</string>
     <string name="main_head_instructions">Draw a circle</string>
     <string name="about_app_head_lead_programmer">Chief programmer</string>
-    <string name="about_app_head_math_center">Stockholms Mathematics central</string>
+    <string name="about_app_head_math_center">Stockholm mathematics centre</string>
     <string name="about_app_head_programmers">Programmers</string>
     <string name="about_app_head_project_leader">Project leader</string>
     <string name="about_app_head_secretary">Secretary</string>
@@ -30,7 +30,7 @@
     <string name="imperfectStrokeColor">#263238</string>
     <string name="instruction_part_one">Try to draw a circle as round as possible. An approximation of pi will be computed from the drawn circle.</string>
     <string name="language">Språk/Language</string>
-    <string name="logo_text">A collaboration between Stockholm matemathic central and students at Royal technical institute(KTH).</string>
+    <string name="logo_text">A collaboration between Stockholm matemathics centre and students at KTH Royal Institute of Technology.</string>
     <string name="main_circle_drawing_message1">Try again!</string>
     <string name="main_sidebar_attribution">A collaboration between Stockholm matemathics centre and students at KTH Royal Institute of Technology.</string>
     <string name="name_AE">Anna-Karin Evert</string>

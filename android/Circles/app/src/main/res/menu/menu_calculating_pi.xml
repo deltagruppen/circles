@@ -6,7 +6,11 @@
         android:orderInCategory="100" app:showAsAction="never"
         android:onClick="showPiInfo"/>
 
-    <item android:id="@+id/textView1" android:title="@string/about_app_name"
+    <item android:id="@+id/textView1" android:title="@string/action_setting"
+        android:orderInCategory="100" app:showAsAction="never"
+        android:onClick="showSetting"/>
+
+    <item android:id="@+id/textView2" android:title="@string/about_app_name"
         android:orderInCategory="100" app:showAsAction="never"
         android:onClick="showAppInfo"/>
 

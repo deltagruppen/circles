@@ -11,23 +11,22 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
-import java.text.NumberFormat;
 import java.util.LinkedList;
-import java.util.Locale;
 
 public class DrawView extends RelativeLayout
 {
     private final LinkedList<PointF>  points;
     private Path                      path;
+    private static int                StrokeWidth = 10;
     private final Paint               paint;
 
     private ImperfectCircleView imperfectCircleView;
     private ClosestCircleView   closestCircleView;
-    private TableLayout         piCalculationPopup;
+    private LinearLayout         piCalculationPopup;
     private TextView            piMessagePopup;
 
     public DrawView(Context context, AttributeSet attrs)
@@ -37,7 +36,7 @@ public class DrawView extends RelativeLayout
         paint  = new Paint();
         path   = new Path();
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(10);
+        paint.setStrokeWidth(StrokeWidth);
         paint.setColor(Color.BLACK);
     }
 
@@ -46,7 +45,7 @@ public class DrawView extends RelativeLayout
     {
         imperfectCircleView = (ImperfectCircleView) findViewById(R.id.imperfectCircleView);
         closestCircleView   = (ClosestCircleView)   findViewById(R.id.closestCircleView);
-        piCalculationPopup  = (TableLayout)         findViewById(R.id.piCalculationPopup);
+        piCalculationPopup  = (LinearLayout)         findViewById(R.id.piCalculationPopup);
         piMessagePopup      = (TextView)            findViewById(R.id.piMessagePopup);
     }
 
@@ -87,7 +86,7 @@ public class DrawView extends RelativeLayout
             try {
                 ImperfectCircle imperfectCircle = new ImperfectCircle(points);
                 imperfectCircleView.setImperfectCircle(imperfectCircle);
-                TextView approximationTextView = (TextView) piCalculationPopup.findViewById(R.id.piApproximation);
+                TextView approximationTextView = (TextView) piCalculationPopup.findViewById(R.id.pi_approximation_field);
 
                 double l = imperfectCircle.getPerimeterLength();
                 double a = Math.abs(imperfectCircle.getArea());
@@ -99,13 +98,8 @@ public class DrawView extends RelativeLayout
 
                 approximationTextView.setText(s);
 
-                //Only show closest circle and the popup when pi is below 3.8
-                if (pi < 3.8) {
-                    closestCircleView.setImperfectCircle(imperfectCircle);
-                    piCalculationPopup.setVisibility(View.VISIBLE);
-                }
-
-
+                piCalculationPopup.setVisibility(View.VISIBLE);
+                closestCircleView.setImperfectCircle(imperfectCircle);
             }
             catch (IllegalArgumentException e) {
                 Log.i("DrawView", "Not a circle :(");

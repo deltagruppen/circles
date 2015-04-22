@@ -14,14 +14,14 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="#ff93b6c5"
+        android:background="@color/medium_gray"
         android:id="@+id/linearLayout">
 
         <GridLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:background="#ffbfd8dc"
+            android:background="@color/light_gray"
             android:weightSum="1"
             android:id="@+id/shortdesc">
 
@@ -36,7 +36,7 @@
                 android:layout_marginTop="18dp"
                 android:layout_marginRight="18dp"
                 android:layout_marginEnd="36dp"
-                android:contentDescription="@string/hand_arrow_description" />
+                android:contentDescription="@string/main_hand_arrow_description"/>
 
             <GridLayout
                 android:orientation="vertical"
@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/head_instructions"
+                    android:text="@string/main_head_instructions"
                     android:id="@+id/textView"
                     android:layout_marginTop="18dp"
                     android:textSize="17sp"
@@ -65,26 +65,14 @@
                     android:textSize="13sp"
                     android:layout_row="2"
                     android:layout_column="0" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/instruction_part_two"
-                    android:id="@+id/textView2"
-                    android:textSize="13sp"
-                    android:layout_weight="0.91"
-                    android:layout_row="4"
-                    android:layout_column="0" />
             </GridLayout>
 
         </GridLayout>
-
     </LinearLayout>
 
     <deltagruppen.circles.DrawView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/linearLayout"
         android:layout_toEndOf="@+id/linearLayout"
@@ -92,8 +80,8 @@
         android:id="@+id/linearLayout8">
 
         <deltagruppen.circles.ImperfectCircleView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             circles:imperfectCircleStrokeWidth="10"
             circles:imperfectCircleStrokeColor="@string/imperfectStrokeColor"
@@ -110,130 +98,85 @@
 
         <TextView
             android:id="@+id/piMessagePopup"
-            android:layout_width="108dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/main_circle_drawing_message1"
-            android:background="#ff03a9f4"
-            android:textColor="#ffffffff"
+            android:textColor="@color/darker_gray"
             android:gravity="center"
-            android:textSize="12sp"
+            android:textSize="@dimen/font_size_medium"
             android:visibility="gone"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/activity_vertical_margin_big"
+            android:layout_marginBottom="@dimen/activity_margin_big"
             android:padding="10dp"/>
 
-        <TableLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="181dp"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:id="@+id/piCalculationPopup"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:paddingBottom="@dimen/activity_vertical_margin_big"
+            android:paddingBottom="@dimen/activity_margin_big"
             android:visibility="gone">
 
-            <TableRow
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="39dp">
+                android:layout_height="39dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="65dp"
                     android:layout_height="fill_parent"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/your_pi"
                     android:id="@+id/textView29"
-                    android:layout_column="0"
-                    android:background="#ffb0bec5"
-                    android:textColor="#ff263238"
+                    android:background="@color/medium_gray"
+                    android:textColor="@color/darker_gray"
                     android:gravity="center" />
 
                 <TextView
+                    android:id="@+id/pi_approximation_field"
                     android:layout_width="116dp"
                     android:layout_height="fill_parent"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/piApproximation"
-                    android:layout_column="1"
-                    android:background="#ffcfd8dc"
-                    android:textColor="#ff78909c"
+                    android:background="@color/light_gray"
+                    android:textColor="@color/maybe_medium_gray"
                     android:layout_marginRight="4dp"
-                    android:text="updateUserPi"
                     android:gravity="center" />
+            </LinearLayout>
 
-                <Button
-                    android:layout_width="108dp"
-                    android:layout_height="fill_parent"
-                    android:text="@string/pi_calculation_title"
-                    android:id="@+id/button_calc"
-                    android:onClick="showCalculatingPiInfo"
-                    android:layout_column="2"
-                    android:background="#ff03a9f4"
-                    android:textColor="#ffffffff"
-                    android:gravity="center"
-                    android:textSize="12sp"/>
-            </TableRow>
+            <LinearLayout
+                android:id="@+id/score_popup_dividing_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:orientation="horizontal"
+                android:background="@color/dark_gray"></LinearLayout>
 
-            <TableRow
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_margin="0dp">
-
-                <TextView
-                    android:layout_width="65dp"
-                    android:layout_height="1dp"
-                    android:background="#ff90a4ac"/>
-
-                <TextView
-                    android:layout_width="116dp"
-                    android:layout_height="1dp"
-                    android:background="#ff90a4ac"/>
-
-                <TextView
-                    android:layout_width="108dp"
-                    android:layout_height="1dp"
-                    android:background="#ff0288d1"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="39dp">
+                android:layout_height="39dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="65dp"
                     android:layout_height="fill_parent"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/actual_pi"
                     android:id="@+id/textView28"
-                    android:layout_column="0"
-                    android:background="#ffb0bec5"
-                    android:textColor="#ff263238"
+                    android:background="@color/medium_gray"
+                    android:textColor="@color/darker_gray"
                     android:gravity="center" />
 
                 <TextView
                     android:layout_width="116dp"
                     android:layout_height="fill_parent"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/pi"
                     android:id="@+id/textView30"
-                    android:layout_column="1"
-                    android:background="#ffcfd8dc"
-                    android:textColor="#ff78909c"
+                    android:background="@color/light_gray"
+                    android:textColor="@color/maybe_medium_gray"
                     android:layout_marginRight="4dp"
                     android:gravity="center" />
 
-                <Button
-                    android:layout_width="108dp"
-                    android:layout_height="fill_parent"
-                    android:text="@string/teach_me_pi"
-                    android:id="@+id/button_teach"
-                    android:layout_column="2"
-                    android:background="#ff03a9f4"
-                    android:textColor="#ffffffff"
-                    android:gravity="center"
-                    android:textSize="12sp"
-                    android:onClick="showPiInfo"
-                    android:padding="10dp"/>
-            </TableRow>
-        </TableLayout>
+            </LinearLayout>
+        </LinearLayout>
 
     </deltagruppen.circles.DrawView>
 
@@ -263,10 +206,10 @@
         android:layout_marginLeft="130dp"
         android:layout_marginStart="117dp"
         android:textColor="#ffffffff"
-        android:textSize="12sp"
+        android:textSize="10dp"
         android:layout_toStartOf="@+id/linearLayout8"
         android:layout_alignTop="@+id/imageButton"
-        android:layout_toLeftOf="@+id/linearLayout8" />
+        android:layout_toLeftOf="@+id/linearLayout8"/>
 
     <TableLayout
         android:layout_width="320dp"
@@ -275,33 +218,6 @@
         android:layout_alignRight="@+id/textView33"
         android:layout_alignEnd="@+id/textView33"
         android:layout_marginTop="150dp">
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="10dp">
-
-            <ImageButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/imageButton2"
-                android:layout_column="0"
-                android:background="#ff4caf50"
-                android:cropToPadding="false"
-                android:src="@drawable/ic_trophy_white_24dp" />
-
-            <Button
-                android:layout_width="280dp"
-                android:layout_height="40dp"
-                android:textSize="20sp"
-                android:text="@string/highscore"
-                android:id="@+id/button"
-                android:layout_column="1"
-                android:background="#ff4caf50"
-                android:singleLine="true"
-                android:textColor="#ffffffff"
-                android:gravity="center_vertical" />
-        </TableRow>
 
         <TableRow
             android:layout_width="fill_parent"

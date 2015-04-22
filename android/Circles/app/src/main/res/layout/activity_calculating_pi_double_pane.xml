@@ -5,7 +5,7 @@
     android:id="@+id/pi_info_layout">
 
     <RelativeLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/header_field"
         android:background="#ff0097a7"
         android:id="@+id/calculating_pi_header_field">
@@ -22,45 +22,35 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="1200dp"
-        android:layout_height="fill_parent"
-        android:layout_centerInParent="true"
-        android:baselineAligned="false"
-        android:layout_below="@id/calculating_pi_header_field">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/calculating_pi_header_field"
+        android:layout_margin="@dimen/activity_margin_big">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/calculating_pi_text_field1"
-            android:layout_marginTop="@dimen/activity_vertical_margin_big">
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/pi_calculation_intro"
-                android:id="@+id/textView12"
-                android:textSize="@dimen/font_size_medium" />
-
-            </LinearLayout>
+            android:text="@string/pi_calculation_intro"
+            android:id="@+id/textView12"
+            android:textSize="@dimen/font_size_medium" />
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/calculating_pi_text_field1">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/activity_margin_big">
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp">
+                android:layout_marginRight="@dimen/activity_margin_bigger"
+                android:layout_marginLeft="@dimen/activity_margin_bigger">
 
                 <TableLayout
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="false"
                     android:layout_alignParentLeft="false"
@@ -69,8 +59,8 @@
                     android:id="@+id/tableLayout2">
 
                 <TableRow
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginBottom="10dp">
 
                     <TextView
@@ -84,7 +74,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                     <TextView
@@ -119,7 +109,7 @@
                 </TableLayout>
 
                 <TableLayout
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:shrinkColumns="1"
                     android:id="@+id/tableLayout"
@@ -129,7 +119,7 @@
 
                     <TableRow
                         android:layout_width="25dp"
-                        android:layout_height="fill_parent"
+                        android:layout_height="match_parent"
                         android:layout_marginBottom="10dp">
 
                         <TextView
@@ -152,14 +142,14 @@
                     </TableRow>
 
                     <TableRow
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
                     </TableRow>
 
                       <TableRow
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_marginBottom="10dp" >
 
                       </TableRow>
@@ -167,19 +157,18 @@
             </RelativeLayout>
 
             <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
                 android:layout_marginRight="30dp">
 
                 <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pi_calculation_part6"
-                android:paddingLeft="10dp"
-                android:layout_gravity="center_horizontal"
-                android:textSize="18sp"
-                android:id="@+id/textView50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pi_calculation_part6"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="18sp"
+                    android:id="@+id/textView50"
                     android:layout_below="@+id/imageView4"
                     android:layout_alignLeft="@+id/textView34"
                     android:layout_alignStart="@+id/textView34"
@@ -191,7 +180,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/pi_calculation_part5"
                     android:id="@+id/textView34"
-                    android:paddingLeft="10dp"
                     android:textSize="18sp"
                     android:layout_marginTop="57dp"
                     android:layout_below="@+id/textView32"
@@ -225,16 +213,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/pi_calculation_part4"
-                    android:paddingLeft="10dp"
                     android:layout_gravity="center_horizontal"
                     android:textSize="18sp"
                     android:layout_column="1"
                     android:layout_alignParentTop="true"
                     android:layout_alignLeft="@+id/textView34"
-                    android:layout_alignStart="@+id/textView34"
-                    android:layout_marginRight="20dp"/>
+                    android:layout_alignStart="@+id/textView34"/>
 
             </RelativeLayout>
             </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
     </RelativeLayout>

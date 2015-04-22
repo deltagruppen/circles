@@ -9,7 +9,13 @@
     <string name="about_pi_header">Fakta om pi</string>
     <string name="about_pi_title">Fakta om pi</string>
     <string name="about_pi">Fakta om pi</string>
+    <string name="action_setting">Inställningar</string>
+    <string name="action_settingCap">INSTÄLLNINGAR</string>
     <string name="action_settings">Settings</string>
+    <string name="clear_list">Nollställ den befintliga High score listan</string>
+    <string name="popupheader_lang">Välj språk</string>
+    <string name="swe">Svenska</string>
+    <string name="eng">Engelska</string>
     <string name="actual_pi">Pi</string>
     <string name="app_info_title">Om Perfect Pi</string>
     <string name="closestStrokeColor">#40d81b60</string>
@@ -75,6 +81,7 @@
     <string name="title_activity_app_info">App Info</string>
     <string name="title_activity_calculating_pi">CalculatingPi</string>
     <string name="title_activity_pi_info">Pi Info</string>
+    <string name="title_activity_setting">App Settings</string>
     <string name="your_pi">Ditt pi</string>
     <string name="main_small_instruction">Draw a circle!</string>
 

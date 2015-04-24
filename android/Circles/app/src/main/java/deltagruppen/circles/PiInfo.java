@@ -24,7 +24,7 @@ public class PiInfo extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_pi_info, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -48,8 +48,4 @@ public class PiInfo extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void showCalculatingPiInfo(MenuItem item) {
-        Intent intent = new Intent(this, CalculatingPi.class);
-        startActivity(intent);
-    }
 }

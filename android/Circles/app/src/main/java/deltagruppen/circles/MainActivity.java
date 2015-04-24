@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 
 
@@ -15,10 +16,13 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(getString(R.string.app_name));
+        requestWindowFeature(getWindow().FEATURE_CUSTOM_TITLE);
+        setContentView(R.layout.activity_main);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+        //setTitle(getString(R.string.app_name));
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
+
     }
 
 
@@ -44,15 +48,7 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void showPiInfo(MenuItem item) {
-        Intent intent = new Intent(this, PiInfo.class);
-        startActivity(intent);
-    }
 
-    public void showPiInfo(View view) {
-        Intent intent = new Intent(this, PiInfo.class);
-        startActivity(intent);
-    }
 
     public void showAppInfo(MenuItem item) {
         Intent intent = new Intent(this, AppInfo.class);
@@ -64,14 +60,5 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void showCalculatingPiInfo(MenuItem item) {
-        Intent intent = new Intent(this, CalculatingPi.class);
-        startActivity(intent);
-    }
-
-    public void showCalculatingPiInfo(View view) {
-        Intent intent = new Intent(this, CalculatingPi.class);
-        startActivity(intent);
-    }
 
 }

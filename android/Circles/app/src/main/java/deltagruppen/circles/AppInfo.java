@@ -24,7 +24,7 @@ public class AppInfo extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_app_info, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -43,13 +43,9 @@ public class AppInfo extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void showPiInfo(MenuItem item) {
-        Intent intent = new Intent(this, PiInfo.class);
+    public void showAppInfo(MenuItem item) {
+        Intent intent = new Intent(this, AppInfo.class);
         startActivity(intent);
     }
 
-    public void showCalculatingPiInfo(MenuItem item) {
-        Intent intent = new Intent(this, CalculatingPi.class);
-        startActivity(intent);
-    }
 }

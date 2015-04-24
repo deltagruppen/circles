@@ -1,26 +1,23 @@
 package deltagruppen.circles;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.view.ViewGroup.LayoutParams;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
-    Button showLangWindow;
-    ImageButton showLangWindowIm;
     LinearLayout layout;
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +27,20 @@ public class MainActivity extends ActionBarActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         layout = new LinearLayout(this);
-        windowInit();
-        prepareButtons();
+        builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.lang_popup_title)
+                .setPositiveButton(R.string.lang_popup_swe, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //TODO Change language to SWE
+                        Toast.makeText(getApplicationContext(), "Make this button change language.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(R.string.lang_popup_eng, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //TODO Change language to ENG
+                        Toast.makeText(getApplicationContext(), "Make this button change language.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
 
@@ -57,36 +66,15 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void windowInit(){
-        showLangWindow = (Button) findViewById(R.id.button4);
-        showLangWindowIm = (ImageButton) findViewById(R.id.imageButton5);
-    }
-
-    public void prepareButtons(){
-        showLangWindow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LayoutInflater inflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                View langPopup = inflater.inflate(R.layout.layout_lang_popup, null);
-                final PopupWindow pop = new PopupWindow(langPopup, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                pop.showAtLocation(layout, 0, 700, 700);
-            }
-        });
-        showLangWindowIm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LayoutInflater inflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                View langPopup = inflater.inflate(R.layout.layout_lang_popup, null);
-                final PopupWindow pop = new PopupWindow(langPopup, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                pop.showAtLocation(layout, 0, 700, 700);
-            }
-        });
+    public void onClickLang (View view) {
+        AlertPopup();
     }
 
 
- /*   public void changeLanguage () {
-
-    }*/
+    public void AlertPopup() {
+        // Use the Builder class for convenient dialog construction
+        builder.show();
+    }
 
     public void showPiInfo(MenuItem item) {
         Intent intent = new Intent(this, PiInfo.class);

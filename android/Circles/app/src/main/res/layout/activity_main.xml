@@ -343,24 +343,26 @@
             <ImageButton
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:id="@+id/imageButton5"
+                android:id="@+id/imlangbu"
                 android:layout_column="0"
                 android:background="#ff5c6bc0"
                 android:cropToPadding="false"
-                android:src="@drawable/ic_earth_white_24dp" />
+                android:src="@drawable/ic_earth_white_24dp"
+                android:onClick="onClickLang" />
 
             <Button
                 android:layout_width="280dp"
                 android:layout_height="40dp"
                 android:textSize="20sp"
                 android:text="@string/language"
-                android:id="@+id/button4"
+                android:id="@+id/langbu"
                 android:layout_column="1"
                 android:background="#ff5c6bc0"
                 android:layout_marginBottom="10dp"
                 android:singleLine="true"
                 android:textColor="#ffffffff"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:onClick="onClickLang" />
         </TableRow>
 
         <TableRow

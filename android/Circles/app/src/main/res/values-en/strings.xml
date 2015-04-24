@@ -77,7 +77,7 @@
     <string name="title_activity_calculating_pi">CalculatingPi</string>
     <string name="title_activity_pi_info">Pi Info</string>
     <string name="your_pi">Your pi</string>
-    <string name="lang_popup_title">Choose language</string>
+    <string name="lang_popup_title">Choose language:</string>
     <string name="lang_popup_swe">Svenska</string>
     <string name="lang_popup_eng">English</string>
     <string name="lang_popup_keep">Cancel</string>

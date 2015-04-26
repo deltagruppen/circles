@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -26,9 +27,11 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.activity_main);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.activity_titlebar);
 
-        // The sollution to animation was found on https://stackoverflow.com/questions/15022152/how-to-animate-gif-images-in-an-android
+        // The solution to animation was found on https://stackoverflow.com/questions/15022152/how-to-animate-gif-images-in-an-android
         final ImageView animImageView = (ImageView) findViewById(R.id.hand_animation);
         animImageView.setBackgroundResource(R.drawable.hand_animation);
         animImageView.post(new Runnable() {
@@ -40,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        setTitle(getString(R.string.app_name));
+        //setTitle(getString(R.string.app_name));
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 

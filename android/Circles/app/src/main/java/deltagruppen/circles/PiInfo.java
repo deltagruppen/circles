@@ -48,8 +48,5 @@ public class PiInfo extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void showCalculatingPiInfo(MenuItem item) {
-        Intent intent = new Intent(this, CalculatingPi.class);
-        startActivity(intent);
-    }
+
 }

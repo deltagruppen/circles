@@ -1,5 +1,6 @@
 package perfectpi.circles;
 
+import android.graphics.Point;
 import android.graphics.PointF;
 
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
@@ -7,6 +8,7 @@ import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 
 import perfectpi.circles.math.LineSegment;
 
@@ -16,13 +18,13 @@ import perfectpi.circles.math.LineSegment;
 public class ImperfectCircle
 {
 
-    private final List<PointF> points;
+    private List<PointF> input;
+    private List<PointF> points;
+    private List<LineSegment> segments;
 
     // Value for checking proximity between points will depend on the
     // stroke width of drawn path.
     private static double      DMax = 10;
-
-
 
     /**
      * Create a new imperfect circle from the given points.
@@ -32,79 +34,97 @@ public class ImperfectCircle
      */
     public ImperfectCircle(List<PointF> input)
     {
-        // Clean the input (fixes issue #19)
-        cleanInput(input);
+        this.input = input;
 
-        // Insert and remove points so that there
-        // is an even distance between all points.
-        normalizeInput(input);
+        // Clean the input (fixes issue #19)
+        cleanInput();
+
+        // Insert and remove points to create an
+        // even distance between all points.
+        normalizeInput();
 
         // Generate a list of line segments from the input
-        List<LineSegment> segments = new ArrayList<>();
+        segments = new ArrayList<>();
         for (int i = 1; i < input.size(); i++) {
             segments.add(new LineSegment(input.get(i-1), input.get(i)));
         }
 
-        // Find the first place two line segments intersect or two points are
-        // in proximity of each other, and only use the points that are on
-        // that closed curve.
-        for (int i = 0; i < segments.size(); i++) {
-            for (int j = i + 2; j < segments.size(); j++) {
-                LineSegment s1 = segments.get(i);
+        points = new ArrayList<>();
+
+        // If an intersection is found all points on the curve between the intersection
+        // will be added to the list points. Process figure accordingly.
+        if (findIntersection()) {
+            closedCurve();
+        } else {
+            openCurve();
+        }
+    }
+
+    private boolean findIntersection() {
+
+        int i, j;
+        for (i = 0; i < segments.size(); i++) {
+            LineSegment s1 = segments.get(i);
+            for (j = i + 2; j < segments.size(); j++) {
                 LineSegment s2 = segments.get(j);
-
                 PointF intersection = s1.getIntersection(s2);
-                int k = pointsInProximity(s1, s2);
-
                 if (intersection != null) {
-                    points = new ArrayList<>(input.subList(i, j + 1));
-
-                    // The intersection should be in the list of points
+                    // Create a list of points containing the first point after the intersection(i+1)
+                    // and the last one before the intersection (j).
+                    points = new ArrayList<>(input.subList(i + 1, j));
+                    // The intersection should be the first and the last point in the list
+                    points.add(0, intersection);
                     points.add(intersection);
 
-                    // Add the first point to the end of the list
-                    points.add(new PointF((float) s1.p1.getX(), (float) s1.p1.getY()));
-                    return;
-
-                    // If two points are in proximity of each other all the points in
-                    // between should be used for calculations. If k = 0 it means
-                    // that the points are not in proximity.
-                } else if (k != 0 && j > i + 10) {
-                    switch (k) {
-
-                        // In case 1 the first and the last points are closest
-                        // to each other.
-                        case 1:
-                            points = new ArrayList<>(input.subList(i, j + 1));
-                            points.add(new PointF((float) s1.p1.getX(), (float) s1.p1.getY()));
-                            return;
-
-                        // In case 2 the second and the last point are closest to each other.
-                        case 2:
-                            points = new ArrayList<>(input.subList(i + 1 , j + 1));
-                            points.add(new PointF((float) s1.p2.getX(), (float) s1.p2.getY()));
-                            return;
-
-                        // In case 3 the second and the point before the last are closest.
-                        case 3:
-                            points = new ArrayList<>(input.subList(i + 1, j));
-                            points.add(new PointF((float) s1.p2.getX(), (float) s1.p2.getY()));
-                            return;
-
-                        // In case 4 the first and the point before the last are closest.
-                        case 4:
-                            points = new ArrayList<>(input.subList(i, j));
-                            points.add(new PointF((float) s1.p1.getX(), (float) s1.p1.getY()));
-                            return;
-                    }
+                    // Move on when an intersection is found.
+                    return true;
                 }
             }
         }
+        return false;
+    }
 
-        // If no proximity or intersection is found then use all drawn points
-        points = new ArrayList<>(input.subList(0,input.size()));
+    /**
+     * If a curve is closed this method shall search for the first part of
+     * that curve with an area. If there are more than one closed curve
+     * with an area connected to the first intersection the curve with the
+     * biggest area should be returned.
+     *
+     * @return A new list of points containing the first closed curve.
+     */
+    private void closedCurve() {
+    }
 
-        // Add the first point once again
+    /**
+     * If no intersection is found the algorithm will try and find
+     * a place where the curve is in proximity of itself and add
+     * all points in between that place. If no such place is found
+     * a line between the first and last point will be made.
+     */
+    private void openCurve() {
+
+        for (int i = 0; i < segments.size(); i++) {
+
+            // j = i + 10 to prevent points too close in sequence to be interpreted as
+            // points in proximity.
+            for (int j = i + 10; j < segments.size(); j++) {
+                LineSegment s1 = segments.get(i);
+                LineSegment s2 = segments.get(j);
+
+                // If two points are in proximity add all points in between.
+                // Otherwise add all points from the input with the first
+                // point inserted again at the end.
+                if (pointsInProximity(s1, s2)) {
+                    points = new ArrayList<>(input.subList(i, j + 1));
+                    points.add(new PointF((float) s1.p1.getX(), (float) s1.p1.getY()));
+                    return;
+                }
+            }
+        }
+        // If no points in proximity are found then use all drawn points...
+        points = new ArrayList<>(input.subList(0, input.size()));
+
+        // and add the first point once again.
         points.add(input.get(0));
     }
 
@@ -182,84 +202,23 @@ public class ImperfectCircle
     }
 
     /**
-     * Some devices seem to register the same point twice in a
-     * row on touch move events, which messes with our algorithms
-     * because we get line segments of zero length. This method
-     * goes through the list and removes such duplicate points.
+     * Check to se if the line segments are in accepted proximity of each other and find
+     * the smallest difference between the end points.
      *
-     * See issue #19 (https://github.com/deltagruppen/circles/issues/19)
-     * for more info.
-     *
-     * @param input A list of points.
+     * @param s1 First line segment
+     * @param s2 Second line segment
+     * @return True or false
      */
-    private void cleanInput(List<PointF> input)
+    public boolean pointsInProximity(LineSegment s1, LineSegment s2)
     {
-        PointF p1, p2;
-        ListIterator<PointF> iterator = input.listIterator();
-        while (iterator.nextIndex() < input.size() - 2) {
-            p1 = iterator.next();
-            p2 = iterator.next();
+        double dX, dY, d;
 
-            if (p1.equals(p2.x, p2.y)) iterator.remove();
-            iterator.previous();
-        }
-    }
+        dX = s1.p1.getX() - s2.p2.getX();
+        dY = s1.p1.getY() - s2.p2.getY();
 
-    /**
-     * Even out the distance between all points in a given list of points.
-     * A point which is to close to the last point will be removed.
-     * If the distance between two points is too great new points will
-     * be inserted in the list.
-     *
-     * @param input The given list of points
-     */
-    public void normalizeInput(List<PointF> input)
-    {
-        PointF p1, p2;
-        int i = 0;
-
-        // Will keep track of how many points that are
-        // inserted.
-        int pointsInserted;
-
-        while (i < input.size() - 2) {
-
-            p1 = input.get(i);
-            p2 = input.get(++i);
-
-            double D = distanceBetweenPoints(p1, p2);
-
-            // No points should be closer than DMax to each other
-            if (D <= DMax) {
-                input.remove(i);
-                i--;
-            } else if (D > (DMax + (DMax / 2))) {
-
-                // Insert points in the appropriate place and return the amount
-                // of points added.
-                pointsInserted = insertPointsBetween(p1, p2, input, D, i);
-                i += pointsInserted;
-            } else i++;
-        }
-    }
-
-    /**
-     * Find the distance between two points
-     *
-     * @param p1 First point
-     * @param p2 Second point
-     * @return Distance
-     */
-    public double distanceBetweenPoints(Vector2D p1, Vector2D p2)
-    {
-        double dX, dY, D;
-
-        dX = p1.getX() - p2.getX();
-        dY = p1.getY() - p2.getY();
-
-        D = Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
-
-        return D;
+        d = Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
+        if (d < DMax) return true;
+        else return false;
     }
 
     /**
@@ -278,31 +237,6 @@ public class ImperfectCircle
         D = Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
 
         return D;
-    }
-
-    /**
-     * Check to se if the line segments are in accepted proximity of each other and find
-     * the smallest difference between the end points.
-     *
-     * @param s1 First line segment
-     * @param s2 Second line segment
-     * @return True or false
-     */
-    public int pointsInProximity(LineSegment s1, LineSegment s2)
-    {
-        int _case = 1;
-        double dMin = distanceBetweenPoints(s1.p1, s2.p2);
-        double distanceBetween_s1p2_s2p2 = distanceBetweenPoints(s1.p2, s2.p2);
-        double distanceBetween_s1p2_s2p1 = distanceBetweenPoints(s1.p2, s2.p1);
-        double distanceBetween_s1p1_s2p1 = distanceBetweenPoints(s1.p1, s2.p1);
-
-        // Find the smallest difference in all situations between end points of two line segments.
-        if (distanceBetween_s1p2_s2p2 < dMin) dMin = distanceBetween_s1p2_s2p2; _case = 2;
-        if (distanceBetween_s1p2_s2p1 < dMin) dMin = distanceBetween_s1p2_s2p1; _case = 3;
-        if (distanceBetween_s1p1_s2p1 < dMin) _case = 4;
-
-        if (dMin < DMax) return _case;
-        else return 0;
     }
 
     /**
@@ -363,4 +297,86 @@ public class ImperfectCircle
         if (D >= DMax / 2) { return i; }
         else { return (i - 1); }
     }
+
+    /**
+     * Some devices seem to register the same point twice in a
+     * row on touch move events, which messes with our algorithms
+     * because we get line segments of zero length. This method
+     * goes through the list and removes such duplicate points.
+     *
+     * See issue #19 (https://github.com/deltagruppen/circles/issues/19)
+     * for more info.
+     */
+    private void cleanInput()
+    {
+        PointF p1, p2;
+        ListIterator<PointF> iterator = input.listIterator();
+        while (iterator.nextIndex() < input.size() - 2) {
+            p1 = iterator.next();
+            p2 = iterator.next();
+
+            if (p1.equals(p2.x, p2.y)) iterator.remove();
+            iterator.previous();
+        }
+    }
+
+    /**
+     * Even out the distance between all points in a given list of points.
+     * A point which is to close to the last point will be removed.
+     * If the distance between two points is too great new points will
+     * be inserted in the list.
+     */
+    private void normalizeInput()
+    {
+        PointF p1, p2;
+        int i = 0;
+
+        // Will keep track of how many points that are
+        // inserted.
+        int pointsInserted;
+
+        while (i < input.size() - 2) {
+
+            p1 = input.get(i);
+            p2 = input.get(++i);
+
+            double D = distanceBetweenPoints(p1, p2);
+
+            // No points should be closer than DMax to each other
+            if (D <= DMax) {
+                input.remove(i);
+                i--;
+            } else if (D > (DMax + (DMax / 2))) {
+
+                // Insert points in the appropriate place and return the amount
+                // of points added.
+                pointsInserted = insertPointsBetween(p1, p2, input, D, i);
+                i += pointsInserted;
+            } else i++;
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -2,6 +2,7 @@ package perfectpi.circles;
 
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.widget.ArrayAdapter;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Line;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
@@ -22,9 +23,11 @@ public class ImperfectCircle
     private List<PointF> input;
     private List<PointF> points;
     private List<LineSegment> segments;
+    private List<LineSegment> tempSegments;
     private PointF firstIntersection;
     private PointF lastPoint;
     private LineSegment firstLineSegment;
+    private boolean counterClockWise;
 
     // Value for checking proximity between points will depend on the
     // stroke width of drawn path.
@@ -54,6 +57,10 @@ public class ImperfectCircle
         }
 
         points = new ArrayList<>();
+        tempSegments = new ArrayList<>();
+
+        // Begin with checking the figure in the counter clock wise direction
+        counterClockWise = true;
 
         // If an intersection is found all points on the curve between the intersection
         // will be added to the list points. Process figure accordingly.
@@ -74,14 +81,19 @@ public class ImperfectCircle
         int startIndex = 0, finalIndex = 0;
         PointF intersection;
 
+        // Keeps track of the iterated points. Will be used to add points in the list points when needed.
+        List<PointF> pointStack = new ArrayList<>();
+
         for (int i = 0; i < segments.size(); i++) {
             LineSegment s1 = segments.get(i);
+            pointStack.add(new PointF((float)s1.p1.getX(), (float)s1.p1.getY()));
+
+
             for (int j = i + 2; j < segments.size(); j++) {
                 LineSegment s2 = segments.get(j);
                 intersection = s1.getIntersection(s2);
                 if (intersection != null) {
 
-                    List<LineSegment> tempSegments;
                     // If the first intersection is unassigned assign the first intersection and the first line segment
                     // otherwise more than one intersection exist and the figure must be further examined.
                     if (firstIntersection == null) {
@@ -91,20 +103,24 @@ public class ImperfectCircle
                         // Remember where the first intersection exists in case it's the only one.
                         startIndex = i; finalIndex = j;
 
-                        // The first intersection is found. Only keep segments in between. Discard the
-                        // first ten segments to prevent too small distances between the first and the
-                        // second intersection.
+                        // Add the first two points
+                        points.add(firstIntersection);
+                        points.add(new PointF ((float) s2.p1.getX(), (float) s2.p2.getY()));
 
-                        tempSegments = new ArrayList<>(segments.subList(i+10, j + 1));
-                        segments.clear();
-                        segments.addAll(tempSegments);
+                        // The first intersection is found. Discard the first segment containing the intersection,
+                        // the line directly after and every segment after the second line containing the intersection.
+                        segments = segments.subList(i + 2, j + 1);
+
+                        // Every point up to the first intersection is outside the closed curve.
+                        pointStack.clear();
 
 
                     } else {
-                        // More than one intersections exist.
-                        // Add the first ten points to the beginning of the list.
-                        points = new ArrayList<>(input.subList(startIndex, 11));
+                        points.addAll(pointStack);
+                        points.add(intersection);
                         lastPoint = intersection;
+                        segments = segments.subList(j + 1, segments.size());
+
                         return true; // TODO optimization: Add all points up to the second intersection and reorder segments.
                     }
                     // Look for the next intersection, if there are no more the closed curve has been established
@@ -117,6 +133,7 @@ public class ImperfectCircle
         if ((lastPoint = firstIntersection) != null) {
 
             // Add all points from the intersection back to the intersection. Clear all former points.
+            points.clear();
             points = new ArrayList<>(input.subList(startIndex,finalIndex+1));
             points.add(0, firstIntersection);
             points.add(firstIntersection);
@@ -142,9 +159,9 @@ public class ImperfectCircle
         // the closed curve is completely built. If there's only one intersection
         // nextIntersection() will never be reached since lastPoint will already be
         // equal to the first intersection.
-        while (lastPoint != firstIntersection) {
+        while (lastPoint != points.get(0)) {
             nextIntersection();
-        }
+            }
     }
 
     /**
@@ -169,7 +186,7 @@ public class ImperfectCircle
             if ((intersection = s1.getIntersection(firstLineSegment)) != null) {
                 points.addAll(pointStack);
                 points.add(intersection);
-                lastPoint = firstIntersection;
+                lastPoint = firstIntersection; // TODO lastPoint should equal to intersection however the app falls into an endless loop if that's set.
                 return;
             }
 
@@ -191,7 +208,7 @@ public class ImperfectCircle
                     // If the angle between the two line segments is less than 180 degrees the next point in
                     // the closed curve after the intersection is s2.p2. Otherwise the next point is s2.p1
                     // and the segments should be arranged in reversed order to be processed correctly.
-                    if (angle < Math.PI) {
+                    if (turn(angle)) {
 
                         // Add the past points
                         points.addAll(pointStack);
@@ -200,12 +217,10 @@ public class ImperfectCircle
                         points.add(intersection);
 
                         // Skip over all segments from i to j + 1.
-                        List<LineSegment> tempSegments = new ArrayList<>(segments.subList(j + 1, segments.size()));
-                        segments.clear();
-                        segments.addAll(tempSegments);
+                        segments = segments.subList(j , segments.size());
                         return;
 
-                    } else if (angle > Math.PI) {
+                    } else if (turn(angle)) {
                         points.add(intersection);
 
                         // Extract the part of the closed curve that is backwards
@@ -224,8 +239,7 @@ public class ImperfectCircle
                         backwards.addAll(rest);
 
                         // Finally set the segments list as the correctly ordered segments
-                        segments.clear();
-                        segments.addAll(backwards);
+                        segments = backwards;
 
                         // Return the intersection so the closed curve method can determine when the
                         // end of the closed curve is reached.
@@ -255,6 +269,17 @@ public class ImperfectCircle
         angle = Math.acos((v1.x * v2.x + v1.y * v2.y)/(v1_length*v2_length));
 
         return angle;
+    }
+
+    private boolean turn(double angle) {
+
+        if (counterClockWise) {
+            if (angle < Math.PI) return true;
+        } else {
+            if (angle > Math.PI) return true;
+        }
+        return false;
+
     }
 
 
